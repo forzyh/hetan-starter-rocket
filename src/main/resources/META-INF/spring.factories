@@ -1,0 +1,5 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.hetan.rocket.base.utils.RocketSpringUtil,\
+  com.hetan.rocket.base.config.RocketAutoConfiguration,\
+  com.hetan.rocket.aliyun.config.AliyunRocketAutoConfiguration,\
+  com.hetan.rocket.aliyun.config.AliyunAspectConfiguration
