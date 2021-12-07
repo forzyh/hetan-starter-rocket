@@ -1,6 +1,6 @@
-# sinzetech-starter-rocket
+# Hetan-starter-rocket
 
-阿里云RocketMQ SDK Starter，使用方法与类的方式收发消息。[示例代码仓库](https://gitee.com/zztech2020/sinzetech-rocket-example)
+阿里云RocketMQ SDK Starter，使用方法与类的方式收发消息。[示例代码仓库](https://gitee.com/zztech2020/Hetan-rocket-example)
 
 # 一、快速启动
 
@@ -9,8 +9,8 @@
 ```xml
 <!--在pom.xml中添加依赖-->
 <dependency>
-    <groupId>com.sinzetech</groupId>
-    <artifactId>sinzetech-starter-rocket</artifactId>
+    <groupId>com.hetan</groupId>
+    <artifactId>hetan-starter-rocket</artifactId>
 </dependency>
 ```
 
@@ -31,10 +31,10 @@ rocket:
 
 @EnableRocketMQ
 @SpringBootApplication
-public class SinzetechRocketExampleApplication {
+public class HetanRocketExampleApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SinzetechRocketExampleApplication.class, args);
+        SpringApplication.run(HetanRocketExampleApplication.class, args);
     }
 
 }
@@ -712,7 +712,7 @@ public class MessageTypeMessageListener implements AliyunCommonConsumerListener<
 
 ```yaml
 # 注解中的外部配置
-sinzetech:
+Hetan:
     rocket:
         example:
             expand-group: expandGroup
@@ -739,24 +739,24 @@ sinzetech:
  * @author 赵元昊
  * @date 2021/08/21 19:10
  **/
-@RocketMessageSend(groupID = "exampleGroup", exGroupID = "${sinzetech.rocket.example.expand-group}")
+@RocketMessageSend(groupID = "exampleGroup", exGroupID = "${Hetan.rocket.example.expand-group}")
 @Component
 public class ConfigSendAnnotation {
 
-    @CommonMessage(topic = "exampleTopic", exTopic = "${sinzetech.rocket.example.expand-topic}",
-        tag = "exampleTag", exTag = "${sinzetech.rocket.example.expand-tag}")
+    @CommonMessage(topic = "exampleTopic", exTopic = "${Hetan.rocket.example.expand-topic}",
+        tag = "exampleTag", exTag = "${Hetan.rocket.example.expand-tag}")
     public String sendCommonMessage() {
         return "发送常用消息";
     }
 
-    @TransactionMessage(topic = "exampleTopic", exTopic = "${sinzetech.rocket.example.expand-topic}",
-        tag = "exampleTag", exTag = "${sinzetech.rocket.example.expand-tag}")
+    @TransactionMessage(topic = "exampleTopic", exTopic = "${Hetan.rocket.example.expand-topic}",
+        tag = "exampleTag", exTag = "${Hetan.rocket.example.expand-tag}")
     public String sendTransactionMessage() {
         return "事务消息";
     }
 
-    @OrderMessage(topic = "exampleTopic", exTopic = "${sinzetech.rocket.example.expand-topic}",
-        tag = "exampleTag", exTag = "${sinzetech.rocket.example.expand-tag}")
+    @OrderMessage(topic = "exampleTopic", exTopic = "${Hetan.rocket.example.expand-topic}",
+        tag = "exampleTag", exTag = "${Hetan.rocket.example.expand-tag}")
     public String sendOrderMessage() {
         return "发送有序消息";
     }
@@ -775,9 +775,9 @@ public class ConfigSendAnnotation {
  * @date 2021/08/21 19:24
  */
 @RocketMessageListener(
-    groupID = "exampleGroup", exGroupID = "${sinzetech.rocket.example.expand-group}",
-    topic = "exampleTopic", exTopic = "${sinzetech.rocket.example.expand-topic}",
-    tag = "exampleTag", exTag = "${sinzetech.rocket.example.expand-tag}",
+    groupID = "exampleGroup", exGroupID = "${Hetan.rocket.example.expand-group}",
+    topic = "exampleTopic", exTopic = "${Hetan.rocket.example.expand-topic}",
+    tag = "exampleTag", exTag = "${Hetan.rocket.example.expand-tag}",
     messageType = String.class)
 @Component
 public class ConfigListenerAnnotation implements AliyunCommonConsumerListener<String> {
@@ -920,8 +920,8 @@ public class ExpandSerializerListener implements AliyunCommonConsumerListener<St
 ```xml
 <!--RocketMQ Helper-->
 <dependency>
-    <groupId>com.sinzetech</groupId>
-    <artifactId>sinzetech-starter-rocket-helper</artifactId>
+    <groupId>com.Hetan</groupId>
+    <artifactId>Hetan-starter-rocket-helper</artifactId>
 </dependency>
 ```
 
@@ -938,7 +938,7 @@ public class ExpandSerializerListener implements AliyunCommonConsumerListener<St
 - `SendHelper.failSave()`标志位代表为发送失败后保存
 - `SendHelper.failNotify()`标志位代表为发送失败后通知企业微信
 - `SendHelper.processor()`为可配置的执行器，可多配置，如自定义陪之后会按照配置的顺讯依次执行配置的执行器。 同时，默认配置为空，
-  配置为空时会走全局的默认配置，全局默认配置位置为com.sinzetech.rocket.base.config.RocketProperties.defaultSendHelper, 该标志位在引用Rocket
+  配置为空时会走全局的默认配置，全局默认配置位置为com.Hetan.rocket.base.config.RocketProperties.defaultSendHelper, 该标志位在引用Rocket
   Helper时会自动配置为Rocket Helper的默认实现，如无必要则无需指定。
 
 ```java
@@ -985,9 +985,9 @@ public class SendHelperExampleServer {
 
 ### 2）其他
 
-#### 使用默认的实现包`sinzetech-starter-rocket-helper`时
+#### 使用默认的实现包`Hetan-starter-rocket-helper`时
 
-- 使用默认的实现包时需要在数据库新增[`base_rocket_send_log`](../sinzetech-starter-rocket-helper/doc/db/base_rocket_send_log.sql)表。
+- 使用默认的实现包时需要在数据库新增[`base_rocket_send_log`](../Hetan-starter-rocket-helper/doc/db/base_rocket_send_log.sql)表。
 - 使用该方法时，发送时不出异常则视为发送成功，因此，对异步方法并不友好，使用时谨慎使用。
 
 ## 2）使用`@ListenerHelper`注解
@@ -1039,12 +1039,12 @@ public class ListenerHelperMessageListener implements AliyunCommonConsumerListen
 
 ### 2）其他
 
-#### 使用默认的实现包`sinzetech-starter-rocket-helper`时
+#### 使用默认的实现包`Hetan-starter-rocket-helper`时
 
 - 在仅使用幂等功能的情况时，
-  需要在数据库新增[`base_rocket_idempotent_log`幂等表](../sinzetech-starter-rocket-helper/doc/db/base_rocket_idempotent_log.sql)表。
+  需要在数据库新增[`base_rocket_idempotent_log`幂等表](../Hetan-starter-rocket-helper/doc/db/base_rocket_idempotent_log.sql)表。
 - 在仅使用消费消息记录功能的情况时，
-  需要在数据库新增[`base_rocket_listener_log`](../sinzetech-starter-rocket-helper/doc/db/base_rocket_listener_log.sql)表。
+  需要在数据库新增[`base_rocket_listener_log`](../Hetan-starter-rocket-helper/doc/db/base_rocket_listener_log.sql)表。
 - 在两种功能都需要使用时，以上两种都需要添加。
 
 ## （3）Message_Key
